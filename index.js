@@ -12,18 +12,18 @@ const app = express()
 dotenv.config()
 conectarDB()
 app.use(express.json())
-const whiteList = [process.env.FRONTEND_URL]
-var corsOptions = {
-    origin: function(origin,callback){
-        if(whiteList.includes(origin)){
-            callback(null,true)
-        }else{
-            callback(new Error("Error de cors"))
-        }
-    }
+// const whiteList = [process.env.FRONTEND_URL]
+// var corsOptions = {
+//     origin: function(origin,callback){
+//         if(whiteList.includes(origin)){
+//             callback(null,true)
+//         }else{
+//             callback(new Error("Error de cors"))
+//         }
+//     }
 
-  }
-app.use(cors(corsOptions))
+//   }
+app.use(cors())
 
 const port = process.env.PORT || 4000
 
