@@ -6,24 +6,23 @@ import publicacionRoutes from "./routes/publicacionRoutes.js"
 import chatRoutes from "./routes/chatRoutes.js"
 import conectarDB from "./config/db.js"
 import cors from "cors"
-import { dejarDeSeguirUsuario } from "./controller/usuarioController.js"
 
 const app = express()
 dotenv.config()
 conectarDB()
 app.use(express.json())
 const whiteList = [process.env.FRONTEND_URL]
-// var corsOptions = {
-//     origin: function(origin,callback){
-//         if(whiteList.includes(origin)){
-//             callback(null,true)
-//         }else{
-//             callback(new Error("Error de cors"))
-//         }
-//     }
+var corsOptions = {
+    origin: function(origin,callback){
+        if(whiteList.includes(origin)){
+            callback(null,true)
+        }else{
+            callback(new Error("Error de cors"))
+        }
+    }
 
-//   }
-app.use(cors({origin: whiteList}))
+  }
+app.use(cors(corsOptions))
 
 const port = process.env.PORT || 4000
 
@@ -47,7 +46,7 @@ const servidor = app.listen(port,()=>{
 const io = new Server(servidor,{
     pingTimeout: 60000,
     cors: {
-        origin: process.env.FRONTEND_URL
+        origin: process.env.FRONTEND_URL,
     }
 })
 
