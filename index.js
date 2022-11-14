@@ -1,11 +1,11 @@
 import express from "express"
 import {Server} from "socket.io"
 import dotenv from "dotenv"
+import conectarDB from "./config/db.js"
+import cors from "cors"
 import usuarioRoutes from "./routes/usuarioRoutes.js"
 import publicacionRoutes from "./routes/publicacionRoutes.js"
 import chatRoutes from "./routes/chatRoutes.js"
-import conectarDB from "./config/db.js"
-import cors from "cors"
 
 const app = express()
 dotenv.config()
