@@ -29,22 +29,27 @@ const registrar = async (req,res) => {
 
 const login = async (req,res) => {
     const {email,password} = req.body
-    const usuario = await Usuario.findOne({email})
-    if(!usuario){
-        const error = new Error("Este usuario no existe")
-        return res.status(404).json({msg:error.message})
-    }
-    if(await usuario.comprobarPassword(password)){
-        return res.json({
-            _id:usuario._id,
-            nombre:usuario.nombre,
-            email:usuario.email,
-            codigo: usuario.codigo,
-            token: generarJWT(usuario._id)
-        })
-    }else{
-        const error = new Error("Contraseña incorrecta")
-        return res.status(401).json({msg:error.message})
+    try {
+        const usuario = await Usuario.findOne({email})
+    
+        if(!usuario){
+            const error = new Error("Este usuario no existe")
+            return res.status(404).json({msg:error.message})
+        }
+        if(await usuario.comprobarPassword(password)){
+            return res.json({
+                _id:usuario._id,
+                nombre:usuario.nombre,
+                email:usuario.email,
+                codigo: usuario.codigo,
+                token: generarJWT(usuario._id)
+            })
+        }else{
+            const error = new Error("Contraseña incorrecta")
+            return res.status(401).json({msg:error.message})
+        }
+    } catch (error) {
+            
     }
 }
 /*
