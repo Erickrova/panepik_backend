@@ -23,6 +23,11 @@ app.use(express.json())
 //     }
 
 //   }
+app.use((req,res,next)=>{
+    res.setHeader("Access-Control-Allow-Origin","*")
+    res.setHeader("Access-Control-Allow-Methods","*")
+    res.setHeader("Access-Control-Allow-Headers","*")
+})
 app.use(cors())
 
 const port = process.env.PORT || 4000
@@ -47,7 +52,7 @@ const servidor = app.listen(port,()=>{
 const io = new Server(servidor,{
     pingTimeout: 60000,
     cors: {
-        origin: process.env.FRONTEND_URL,
+        origin: process.env.FRONTEND_URL
     }
 })
 
