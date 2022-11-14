@@ -12,7 +12,7 @@ const app = express()
 dotenv.config()
 conectarDB()
 app.use(express.json())
-// const whiteList = [process.env.FRONTEND_URL]
+const whiteList = [process.env.FRONTEND_URL]
 // var corsOptions = {
 //     origin: function(origin,callback){
 //         if(whiteList.includes(origin)){
@@ -23,12 +23,7 @@ app.use(express.json())
 //     }
 
 //   }
-app.use((req,res,next)=>{
-    res.setHeader("Access-Control-Allow-Origin","*")
-    res.setHeader("Access-Control-Allow-Methods","*")
-    res.setHeader("Access-Control-Allow-Headers","*")
-})
-app.use(cors())
+app.use(cors({origin: whiteList}))
 
 const port = process.env.PORT || 4000
 
