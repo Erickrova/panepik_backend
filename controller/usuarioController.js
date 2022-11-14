@@ -49,7 +49,7 @@ const login = async (req,res) => {
             return res.status(401).json({msg:error.message})
         }
     } catch (error) {
-            
+           console.log(error) 
     }
 }
 /*
