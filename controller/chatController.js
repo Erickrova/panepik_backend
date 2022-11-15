@@ -45,6 +45,7 @@ const enviarMensaje = async (req,res) =>{
             const mensajeAlmacenado = await Mensaje.create({})
             mensajeAlmacenado.mensaje = mensaje
             mensajeAlmacenado.enviadopor = req.usuario._id
+            mensajeAlmacenado.chat = id
             await mensajeAlmacenado.save()
             chat.mensajes.push(mensajeAlmacenado?._id)
             await chat.save()

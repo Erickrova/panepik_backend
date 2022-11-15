@@ -8,6 +8,10 @@ const mensajeSchema = mongoose.Schema({
     enviadopor:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Usuario"
+    },
+    chat:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Chat"
     }
 },{timestamps:true})
 

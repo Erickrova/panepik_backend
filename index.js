@@ -68,7 +68,7 @@ io.on("connection",socket =>{
     })
 
     socket.on("enviar mensaje",data =>{
-        socket.to(data.chat).emit("enviando mensaje",data.mensaje)
+        socket.to(data.chat).emit("enviando mensaje",data)
     })
 
 
