@@ -1,5 +1,5 @@
 import express from "express"
-import {Server} from "socket.io"
+// import {Server} from "socket.io"
 import dotenv from "dotenv"
 import conectarDB from "./config/db.js"
 import cors from "cors"
@@ -34,45 +34,45 @@ app.use("/api/usuarios",usuarioRoutes)
 app.use("/api/publicaciones",publicacionRoutes)
 app.use("/api/chat",chatRoutes)
 
-const servidor = app.listen(port,()=>{
+app.listen(port,()=>{
     console.log("server on port ",port,` http://localhost:${port}`)
 })
 
 
-/*
-  ? SOCKET.IO
-*/
+// /*
+//   ? SOCKET.IO
+// */
 
 
-const io = new Server(servidor,{
-    pingTimeout: 60000,
-    cors: {
-        origin: process.env.FRONTEND_URL,
-    }
-})
+// const io = new Server(servidor,{
+//     pingTimeout: 60000,
+//     cors: {
+//         origin: process.env.FRONTEND_URL,
+//     }
+// })
 
-io.on("connection",socket =>{
+// io.on("connection",socket =>{
 
-    socket.on("abrir chat",data =>{
-        socket.join(data)
-        socket.emit("conectado a sala")
-    })
-    socket.on("dejar seguir",data =>{
-        socket.emit("dejando seguir",data)
-    })
-    socket.on("seguir",data =>{
-        socket.emit("siguiendo",data)
-    })
-    socket.on("on perfil",data =>{
-        socket.join(data)
-    })
+//     socket.on("abrir chat",data =>{
+//         socket.join(data)
+//         socket.emit("conectado a sala")
+//     })
+//     socket.on("dejar seguir",data =>{
+//         socket.emit("dejando seguir",data)
+//     })
+//     socket.on("seguir",data =>{
+//         socket.emit("siguiendo",data)
+//     })
+//     socket.on("on perfil",data =>{
+//         socket.join(data)
+//     })
 
-    socket.on("enviar mensaje",data =>{
-        socket.to(data.chat).emit("enviando mensaje",data)
-    })
+//     socket.on("enviar mensaje",data =>{
+//         socket.to(data.chat).emit("enviando mensaje",data)
+//     })
 
 
-})
+// })
 
 
 
